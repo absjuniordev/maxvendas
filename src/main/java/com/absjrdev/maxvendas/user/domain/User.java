@@ -1,8 +1,11 @@
 package com.absjrdev.maxvendas.user.domain;
 
+import com.absjrdev.maxvendas.order.domain.Order;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -17,8 +20,11 @@ public class User implements Serializable {
     private String phone;
     private String password;
 
-    public User(){
+    @OneToMany(mappedBy = "client")
+    private
+    List<Order> orders = new ArrayList<>();
 
+    public User(){
     }
 
     public User(Long id, String nome, String email, String phone, String password) {
@@ -67,6 +73,10 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
     }
 
     @Override
